@@ -1,63 +1,55 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { render } from 'react-dom';
 import Hello from './Hello';
 import {
   RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
   useRecoilValue,
-  useSetRecoilState,
+  useSetRecoilState
 } from 'recoil';
-import './style.css';
+import 'tailwindcss/tailwind.css';
+import { FaBeer } from 'react-icons/fa';
+import { DiAppcelerator } from 'react-icons/di';
+import { buttonText, countArr } from './stateValues';
 
 const InnerFun = ({ text }) => {
-  return <div>{text}</div>;
+  return <div>--- {text} ---</div>;
 };
 
-export const textState = atom({
-  key: 'key1',
-  default: 'haha its a default text'
-});
-
 export const App = () => {
-  const [text, setText] = useRecoilState(textState);
-  // console.log('---textState', text, textState);
-
-  const charCountState = selector({
-    key: 'charCountState',
-    get: ({get}) => {
-      const text = get(textState);
-      console.log(text);
-      return text.length;
-    },
-    set: ({set}) => set(textState, 'asd'),
-  });
-  const todoListState = atom({
-    key: 'todoListState',
-    default: [],
-  });
-  const selecterValue = useRecoilValue(charCountState);
-
-  const todoList = useRecoilValue(todoListState);
-  console.log('toDo list', todoList);
-
-  const setValue = useSetRecoilState(todoListState);
-
+  const [text, setText] = useRecoilState(buttonText);
+  const [count, setCount] = useRecoilState(countArr);
+  const [inputValue, setInputValue] = React.useState('');
   return (
     <div>
+      <input
+        value={inputValue}
+        onChange={e => {
+          const { value } = e.target;
+          setInputValue(value);
+        }}
+      />
       <button
         onClick={() => {
           setText('Edited value');
-          setValue((old) => [...old,{
-            a: 'nameee',
-            new: 'idx'
-          }])
+          setCount(old => {
+            return [...old, inputValue];
+          });
         }}
       >
-        BTN CLICK{' '}
+        Click To submit{' '}
       </button>
-      <InnerFun {...{ text: text}}/>
+      <th>
+        {count.map(str => (
+          <div>
+            <td>{str}</td>
+            <br />
+          </div>
+        ))}
+      </th>
+      <InnerFun {...{ text: text }} />
+      <FaBeer />
+      <DiAppcelerator />
       <Hello />
     </div>
   );

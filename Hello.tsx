@@ -1,16 +1,25 @@
-import React from 'react';
+import * as React from 'react';
 import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
   useRecoilValue,
-  useSetRecoilState,
+  useRecoilState,
 } from 'recoil';
-import { textState } from './index.tsx';
-export default ({ name }) => {
-  
-  const selecterValue = useRecoilValue(textState);
-  console.log(selecterValue);
-return (<h1>Hello {name}!</h1>);
+import { buttonText, countArr } from './stateValues';
+
+export default () => {
+  const [selecterValue, setSelector] = useRecoilState(buttonText);
+  const countValue = useRecoilValue(countArr);
+  return (
+    <div>
+      <h1>
+        COMPONENT {selecterValue}!
+      </h1>
+      <button
+        onClick={() => {
+          setSelector('Edited from HEllo');
+        }}
+      >
+        HELLO CLASS BUTTON
+      </button>
+    </div>
+  );
 }
