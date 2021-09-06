@@ -22,35 +22,39 @@ export const App = () => {
   const [inputValue, setInputValue] = React.useState('');
   return (
     <div>
-      <input
-        value={inputValue}
-        onChange={e => {
-          const { value } = e.target;
-          setInputValue(value);
-        }}
-      />
-      <button
-        onClick={() => {
-          setText('Edited value');
-          setCount(old => {
-            return [...old, inputValue];
-          });
-        }}
-      >
-        Click To submit{' '}
-      </button>
-      <th>
-        {count.map(str => (
-          <div>
-            <td>{str}</td>
-            <br />
-          </div>
-        ))}
-      </th>
-      <InnerFun {...{ text: text }} />
-      <FaBeer />
-      <DiAppcelerator />
-      <Hello />
+      <div className="bg-teal-500 md:bg-blue-200 lg:bg-teal-200">
+        <input
+          value={inputValue}
+          onChange={e => {
+            const { value } = e.target;
+            setInputValue(value);
+          }}
+        />
+        <button
+          onClick={() => {
+            setText('Edited value');
+            setCount(old => {
+              return [...old, inputValue];
+            });
+          }}
+        >
+          Click To submit{' '}
+        </button>
+        <th>
+          {count.map(str => (
+            <div>
+              <td>{str}</td>
+              <br />
+            </div>
+          ))}
+        </th>
+        <InnerFun {...{ text: text }} />
+        <div className="h-7 sm:h-8">
+          <FaBeer />
+        </div>
+        <DiAppcelerator />
+        <Hello />
+      </div>
     </div>
   );
 };
