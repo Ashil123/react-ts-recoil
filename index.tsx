@@ -21,16 +21,16 @@ export const App = () => {
   const [count, setCount] = useRecoilState(countArr);
   const [inputValue, setInputValue] = React.useState('');
   return (
-    <div>
-      <div className="bg-teal-500 md:bg-blue-200 lg:bg-teal-200">
-        <input
+    <div className="min-h-screen bg-gray-500 py-6 flex flex-col p-4 justify-center sm:py-12">
+      <div className="p-2 m-2 bg-red-200 rounded">
+        <input className="appearance-none border rounded py-2 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"
           value={inputValue}
           onChange={e => {
             const { value } = e.target;
             setInputValue(value);
           }}
         />
-        <button
+        <button className="bg-blue-500  font-semibold rounded p-1 m-2 hover:bg-blue-700 text-white border border-white"
           onClick={() => {
             setText('Edited value');
             setCount(old => {
@@ -42,14 +42,14 @@ export const App = () => {
         </button>
         <th>
           {count.map(str => (
-            <div>
-              <td>{str}</td>
+            <div className="bg-white">
+              <td className="p-1">{str}</td>
               <br />
             </div>
           ))}
         </th>
         <InnerFun {...{ text: text }} />
-        <div className="h-7 sm:h-8">
+        <div className="items-center border-b border-teal-500 py-1" >
           <FaBeer />
         </div>
         <DiAppcelerator />
